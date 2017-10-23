@@ -1,0 +1,17 @@
+.checkboxMainContainer .checkbox > label {
+	padding-top: 0;
+	width: 100%;
+}
+.checkboxMainContainer input[type="checkbox"] {
+	margin: 4px 10px 0 0px;
+	position: initial;
+}
+.checkboxMainContainer .showmoreButton {
+	display: none;
+	cursor: pointer;
+}
+
+.checkboxMainContainer .showmore-hidden {
+	display: none;
+}
+
