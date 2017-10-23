@@ -557,13 +557,20 @@ define([
 						this.onchangeTimeout = null;
 					}
 					this.onchangeTimeout = setTimeout(dojoLang.hitch(this, function () {
-						this._execMF(this._contextObj, this.onChangeMicroflow);
+						this._execOnChange(this.onChangeMicroflow);
 					}), this.onChangeDelay);
 				} else {
-					this._execMF(this._contextObj, this.onChangeMicroflow);
+					this._execOnChange(this.onChangeMicroflow);
 				}
 			},
-			
+
+			_execOnChange: function(microflow) {
+				mx.ui.action(microflow,{
+					context: new mendix.lib.MxContext(),
+					callback: function(){}
+				});
+			},
+
 			eventOnChange : function(textarea, obj) {
 					if (obj.get(this.freeTextAttr) !== textarea.value) {
 							obj.set(this.freeTextAttr, textarea.value);
@@ -587,15 +594,11 @@ define([
 				mx.data.action({
 					params: params,
 					callback: function (objs) {
-						if (typeof callback !== "undefined") {
-							callback(objs);
-						}
+						callback(objs);
 					},
 					error: function (error) {
-						if (typeof callback !== "undefined") {
-							callback();
-						}
-						console.log(error.description);
+						callback();
+						console.log(error.message);
 					}
 				}, this);
 			}
